@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 569.45 121.02">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffc14d;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #5c38b3;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-6 {
+        fill: none;
+        stroke: #5c38b3;
+        stroke-miterlimit: 10;
+        stroke-width: 10.88px;
+      }
+
+      .cls-7 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-3 {
+        font-family: AssistantRoman-Bold, Assistant;
+        font-size: 107.58px;
+        font-variation-settings: 'wght' 700;
+        font-weight: 700;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <text class="cls-3" transform="translate(90.32 94.13)"><tspan class="cls-7" x="0" y="0">L</tspan><tspan x="53.68" y="0">eitm</tspan><tspan class="cls-5" x="270.44" y="0">o</tspan><tspan class="cls-4" x="327.24" y="0">ti</tspan><tspan class="cls-8" x="396.95" y="0">f</tspan><tspan x="431.91" y="0">s</tspan></text>
+    <g>
+      <circle class="cls-1" cx="38" cy="60.51" r="38"/>
+      <g>
+        <path class="cls-6" d="m37.58,78.87c-8.02-.31-18.36-7.11-18.36-18.36,0-10.14,8.22-18.36,18.36-18.36s18.36,8.22,18.36,18.36c0,6.68-3.9,12.86-9.34,16"/>
+        <polygon class="cls-2" points="37.7 61.1 47.24 77.63 56.78 61.1 37.7 61.1"/>
+      </g>
+    </g>
+  </g>
+</svg>
