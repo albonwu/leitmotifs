@@ -5,8 +5,11 @@ import { auth } from "@/firebase/clientApp";
 import { Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
+import { useSetRecoilState } from "recoil";
+import { AuthState } from "@/atoms/authAtom";
 
 const SignUp: React.FC = () => {
+  const setAuthState = useSetRecoilState(AuthState);
   const [signUp, setSignUp] = useState({
     email: "",
     password: "",
@@ -18,7 +21,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     if (error) {
       setError("");
     }
@@ -26,9 +29,9 @@ const SignUp: React.FC = () => {
       setError("Passwords do not match");
       return;
     }
-    console.log("submitted")
-    console.log(signUp.email)
-    console.log(signUp.password)
+    console.log("submitted");
+    console.log(signUp.email);
+    console.log(signUp.password);
     await createUserWithEmailAndPassword(signUp.email, signUp.password);
   };
 
@@ -109,14 +112,6 @@ const SignUp: React.FC = () => {
               FIREBASE_ERRORS[
                 userError?.message as keyof typeof FIREBASE_ERRORS
               ]}
-          </Text>
-          <Text
-            mt="1.5rem"
-            fontWeight="600"
-            onClick={() => console.log("clicked")}
-            _hover={{ cursor: "pointer", textDecoration: "underline" }}
-          >
-            Already joined? Log in here.
           </Text>
         </form>
       </Flex>

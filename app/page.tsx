@@ -1,13 +1,10 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import React from "react";
-import SignUp from "@/components/authfield/SignUp";
+import HomeAuth from "@/components/authfield/HomeAuth";
 
 const Home: React.FC = () => {
   return (
     <>
-      
-      <SignUp />
+      <HomeAuth />
     </>
   );
 };
