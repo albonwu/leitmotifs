@@ -5,11 +5,8 @@ import { auth } from "@/firebase/clientApp";
 import { Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
-import { useSetRecoilState } from "recoil";
-import { AuthState } from "@/atoms/authAtom";
 
 const SignUp: React.FC = () => {
-  const setAuthState = useSetRecoilState(AuthState);
   const [signUp, setSignUp] = useState({
     email: "",
     password: "",
@@ -29,9 +26,7 @@ const SignUp: React.FC = () => {
       setError("Passwords do not match");
       return;
     }
-    console.log("submitted");
-    console.log(signUp.email);
-    console.log(signUp.password);
+
     await createUserWithEmailAndPassword(signUp.email, signUp.password);
   };
 
@@ -43,79 +38,79 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <>
-      <Flex
-        w="30rem"
-        maxWidth="60vw"
-        mt="6rem"
-        ml="auto"
-        mr="auto"
-        flexDir="column"
-        alignItems="center"
-        fontFamily="Assistant"
+    <Flex
+      w="30rem"
+      maxWidth="60vw"
+      mt="6rem"
+      ml="auto"
+      mr="auto"
+      flexDir="column"
+      alignItems="center"
+      fontFamily="Assistant"
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{ width: "100%", textAlign: "center" }}
       >
-        <form
-          onSubmit={handleSubmit}
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <FormControl>
-            <Input
-              placeholder="Email address"
-              name="email"
-              variant="flushed"
-              type="email"
-              focusBorderColor="#5c38b3"
-              autoComplete="off"
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              placeholder="Password"
-              name="password"
-              autoComplete="new-password"
-              variant="flushed"
-              type="password"
-              mt="1rem"
-              focusBorderColor="#5c38b3"
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl>
-            <Input
-              placeholder="Confirm password"
-              name="confirmPassword"
-              variant="flushed"
-              autoComplete="new-password"
-              type="password"
-              mt="1rem"
-              focusBorderColor="#5c38b3"
-              onChange={handleChange}
-            />
-          </FormControl>
+        <FormControl>
+          <Input
+            // id prop fixes "Prop id did not match between server and client" error
+            id="email"
+            placeholder="Email address"
+            name="email"
+            variant="flushed"
+            type="email"
+            focusBorderColor="#5c38b3"
+            autoComplete="off"
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl>
+          <Input
+            id="password"
+            placeholder="Password"
+            name="password"
+            autoComplete="new-password"
+            variant="flushed"
+            type="password"
+            mt="1rem"
+            focusBorderColor="#5c38b3"
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl>
+          <Input
+            id="confirmPassword"
+            placeholder="Confirm password"
+            name="confirmPassword"
+            variant="flushed"
+            autoComplete="new-password"
+            type="password"
+            mt="1rem"
+            focusBorderColor="#5c38b3"
+            onChange={handleChange}
+          />
+        </FormControl>
 
-          <Button
-            mt="3rem"
-            w="12rem"
-            maxWidth="35vw"
-            h="3rem"
-            background="#5c38b3"
-            color="white"
-            fontWeight="800"
-            type="submit"
-            _hover={{ bg: "#8450ff" }}
-          >
-            SIGN UP
-          </Button>
-          <Text textAlign="center" color="red" fontSize="10pt">
-            {error ||
-              FIREBASE_ERRORS[
-                userError?.message as keyof typeof FIREBASE_ERRORS
-              ]}
-          </Text>
-        </form>
-      </Flex>
-    </>
+        <Button
+          mt="3rem"
+          w="12rem"
+          maxWidth="35vw"
+          h="3rem"
+          background="#5c38b3"
+          color="white"
+          fontWeight="800"
+          type="submit"
+          _hover={{ bg: "#8450ff" }}
+        >
+          SIGN UP
+        </Button>
+        <Text textAlign="center" color="red" fontSize="10pt" mt="1rem">
+          {error ||
+            FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
+        </Text>
+      </form>
+    </Flex>
   );
 };
 
