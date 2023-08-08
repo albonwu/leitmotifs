@@ -1,12 +1,14 @@
-"use client"
+"use client";
 
-import { auth } from "@/firebase/clientApp";
+import { auth, firestore } from "@/firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
-import React, { use } from "react";
+import React, { useEffect, useState } from "react";
+import Protected from "@/components/Protected";
 
 const Study: React.FC = () => {
   const [user, loading] = useAuthState(auth);
-  return <>Hello, {user?.email}</>;
+
+  return <Protected>Welcome back, {user?.email}</Protected>;
 };
 
 export default Study;

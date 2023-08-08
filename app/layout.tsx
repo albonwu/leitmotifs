@@ -1,9 +1,7 @@
-"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar/Navbar";
 import { Providers } from "./providers";
-import { RecoilRoot } from "recoil";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +14,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <RecoilRoot>
-            <Navbar />
-            {children}
-          </RecoilRoot>
+          <Navbar />
+          {children}
         </Providers>
       </body>
     </html>
