@@ -5,7 +5,8 @@ import { Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/clientApp";
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignIn: React.FC = () => {
   const [signUp, setSignUp] = useState({
@@ -15,6 +16,7 @@ const SignIn: React.FC = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [emailCopy, setEmailCopy] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,7 +24,8 @@ const SignIn: React.FC = () => {
     await signInWithEmailAndPassword(signUp.email, signUp.password);
 
     if (user && !error) {
-        redirect("/study")
+      console.log("success");
+      router.push("/study");
     }
   };
 
@@ -55,7 +58,6 @@ const SignIn: React.FC = () => {
               variant="flushed"
               type="email"
               focusBorderColor="#5c38b3"
-              autoComplete="off"
               onChange={handleChange}
             />
           </FormControl>
@@ -63,7 +65,6 @@ const SignIn: React.FC = () => {
             <Input
               placeholder="Password"
               name="password"
-              autoComplete="new-password"
               variant="flushed"
               type="password"
               mt="1rem"

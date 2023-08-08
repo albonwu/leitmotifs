@@ -3,7 +3,7 @@
 import React from "react";
 import SignUp from "@/components/authfield/SignUp";
 import SignIn from "@/components/authfield/SignIn";
-import { Flex, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 const HomeAuth: React.FC = () => {
   const [authState, setAuthState] = React.useState<string>("signup");

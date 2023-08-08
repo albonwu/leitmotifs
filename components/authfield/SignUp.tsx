@@ -61,7 +61,6 @@ const SignUp: React.FC = () => {
             variant="flushed"
             type="email"
             focusBorderColor="#5c38b3"
-            autoComplete="off"
             onChange={handleChange}
           />
         </FormControl>
@@ -70,7 +69,6 @@ const SignUp: React.FC = () => {
             id="password"
             placeholder="Password"
             name="password"
-            autoComplete="new-password"
             variant="flushed"
             type="password"
             mt="1rem"
@@ -84,7 +82,6 @@ const SignUp: React.FC = () => {
             placeholder="Confirm password"
             name="confirmPassword"
             variant="flushed"
-            autoComplete="new-password"
             type="password"
             mt="1rem"
             focusBorderColor="#5c38b3"

@@ -17,7 +17,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <RecoilRoot>
-            <Navbar user={false} />
+            <Navbar />
             {children}
           </RecoilRoot>
         </Providers>
