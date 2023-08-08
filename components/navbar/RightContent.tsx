@@ -7,10 +7,11 @@ import {
   IconButton,
   Menu,
   MenuButton,
-  MenuGroup,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase/clientApp";
 
 const RightContent: React.FC = () => {
   return (
@@ -24,9 +25,11 @@ const RightContent: React.FC = () => {
           bg="transparent"
         />
         <MenuList>
-          <MenuItem>Profile</MenuItem>
+          <MenuItem as="a" href="/study">
+            Study
+          </MenuItem>
           <MenuItem>Settings</MenuItem>
-          <MenuItem>Log out</MenuItem>
+          <MenuItem onClick={() => signOut(auth)}>Log out</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

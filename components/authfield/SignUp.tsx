@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { auth } from "@/firebase/clientApp";
+import React, { useState, useEffect } from "react";
+import { auth, firestore } from "@/firebase/clientApp";
 import { Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
+import { User } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 
 const SignUp: React.FC = () => {
   const [signUp, setSignUp] = useState({
@@ -36,6 +38,19 @@ const SignUp: React.FC = () => {
       [event.target.name]: event.target.value,
     }));
   };
+
+  const createUserDocument = async (user: User) => {
+    await addDoc(
+      collection(firestore, "users"),
+      JSON.parse(JSON.stringify(user))
+    );
+  };
+
+  useEffect(() => {
+    if (user) {
+      createUserDocument(user.user);
+    }
+  }, [user]);
 
   return (
     <Flex

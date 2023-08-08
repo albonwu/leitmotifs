@@ -2,7 +2,7 @@
 
 import { FIREBASE_ERRORS } from "@/firebase/errors";
 import { Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/clientApp";
 import { redirect } from "next/navigation";
@@ -18,15 +18,14 @@ const SignIn: React.FC = () => {
   const [emailCopy, setEmailCopy] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    user && redirect("/study");
+  }, [user]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setEmailCopy(signUp.email);
     await signInWithEmailAndPassword(signUp.email, signUp.password);
-
-    if (user && !error) {
-      console.log("success");
-      router.push("/study");
-    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

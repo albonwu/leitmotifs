@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-
+import React, {useState, useEffect } from "react";
 import { Flex, Image } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
@@ -10,6 +9,12 @@ import RightContent from "./RightContent";
 
 const Navbar: React.FC = () => {
   const [user, loading] = useAuthState(auth);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    user && setMounted(true);
+  }, [user]);
+
   return (
     <>
       <Flex backgroundColor={"transparent"} mt="1rem" alignItems="center">
@@ -18,7 +23,7 @@ const Navbar: React.FC = () => {
             <Image src="/logo.svg" alt="Leitmotifs logo" />
           </Flex>
         </Link>
-        {user && <RightContent />}
+        {mounted && <RightContent />}
       </Flex>
     </>
   );
