@@ -11,8 +11,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <CacheProvider>
       <ChakraProvider theme={Theme}>
         <RecoilRoot>
-        <Fonts />
-        {children}
+          <Fonts />
+          {children}
         </RecoilRoot>
       </ChakraProvider>
     </CacheProvider>

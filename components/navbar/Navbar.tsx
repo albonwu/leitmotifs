@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Flex, Image } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Link from "next/link";
