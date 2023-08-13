@@ -1,3 +1,5 @@
+"use client";
+
 import { auth, firestore } from "@/firebase/clientApp";
 import {
   Button,
@@ -23,43 +25,42 @@ const handleNameSubmit = async (uid: string, name: string) => {
 };
 
 const NameModal: React.FC = () => {
-  const [user, loading] = useAuthState(auth);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [user] = useAuthState(auth);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { onClose } = useDisclosure();
   const [name, setName] = useState<string>("" as string);
-  const [value] = useDocumentData(doc(firestore, "users", user?.uid as string));
+  const [value, docLoading] = useDocumentData(
+    doc(firestore, "users", user?.uid as string)
+  );
 
-  useEffect(() => setIsOpen(!value?.name), [value?.name]);
+  useEffect(() => setIsOpen(!docLoading && !value?.name), [value?.name]);
 
   return (
-    <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay>
-          <ModalContent textAlign="center">
-            <ModalHeader fontSize="1.5rem">Welcome to Leitmotifs!</ModalHeader>
-            {/* <ModalCloseButton /> */}
-            <ModalBody>
-              <Text mb="1rem">What's your name?</Text>
-              <Input
-                placeholder="First name"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  setName(e.target.value);
-                }}
-                mb="1rem"
-              />
-              <Button
-                bg="#5c38b3"
-                color="white"
-                onClick={() => handleNameSubmit(user?.uid as string, name)}
-                _hover={{ bg: "#8450ff" }}
-              >
-                Submit
-              </Button>
-            </ModalBody>
-          </ModalContent>
-        </ModalOverlay>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay>
+        <ModalContent textAlign="center">
+          <ModalHeader fontSize="1.5rem">Welcome to Leitmotifs!</ModalHeader>
+          <ModalBody>
+            <Text mb="1rem">What's your name?</Text>
+            <Input
+              placeholder="First name"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setName(e.target.value);
+              }}
+              mb="1rem"
+            />
+            <Button
+              bg="#5c38b3"
+              color="white"
+              onClick={() => handleNameSubmit(user?.uid as string, name)}
+              _hover={{ bg: "#8450ff" }}
+            >
+              Submit
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </ModalOverlay>
+    </Modal>
   );
 };
 
