@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <>
       <HomeAuth />
-      <BackgroundShapes />
+      {/* <BackgroundShapes /> */}
     </>
   );
 };

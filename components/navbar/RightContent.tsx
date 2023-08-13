@@ -3,6 +3,7 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import {
+  Button,
   Flex,
   IconButton,
   Menu,
@@ -18,12 +19,16 @@ const RightContent: React.FC = () => {
     <Flex ml="auto" mr="2rem">
       <Menu>
         <MenuButton
-          as={IconButton}
-          icon={<FaUserCircle />}
-          isRound
-          fontSize="min(3rem, 7.5vw)"
+          as={Button}
+          // icon={<FaUserCircle />}
+          // isRound
+          fontSize="min(1.5rem, 7.5vw)"
+          fontFamily="Assistant"
+          leftIcon={<FaUserCircle />}
           bg="transparent"
-        />
+        >
+          Profile
+        </MenuButton>
         <MenuList>
           <MenuItem as="a" href="/study">
             Study
