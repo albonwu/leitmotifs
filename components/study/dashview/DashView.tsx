@@ -1,7 +1,20 @@
 "use client";
 
-import { Flex, Button, Text, Select, Grid, GridItem } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Flex,
+  Button,
+  Text,
+  Select,
+  Grid,
+  GridItem,
+  Tab,
+  TabList,
+  Tabs,
+  TabPanel,
+  TabPanels,
+  TabIndicator,
+} from "@chakra-ui/react";
+import React, { use, useEffect, useState } from "react";
 import { addDoc, collection, doc } from "firebase/firestore";
 import {
   useCollection,
@@ -10,77 +23,63 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import DeckPreview from "./DeckPreview";
+import DeckSelect from "./DeckSelect";
+import StatsView from "./StatsView";
 
 const DashView: React.FC = () => {
-  const [user, loading] = useAuthState(auth);
-  const [value] = useCollection(
-    collection(firestore, "users", user?.uid as string, "decks")
-  );
+  const [user] = useAuthState(auth);
   const [userDoc] = useDocumentDataOnce(
     doc(firestore, "users", user?.uid as string)
   );
-  const [currentDeck, setCurrentDeck] = useState<string>("" as string);
-  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentDeck(event.target.value);
-  };
-  // console.log(userDoc?.name.name)
+  const [mounted, setMounted] = useState<boolean>(false);
+  // console.log(!userDoc?.name);
+  useEffect(() => {
+    setMounted(userDoc?.name);
+  }, [userDoc]);
+
   return (
     <>
-      <Flex
-        mr="auto"
-        ml="auto"
-        justifyContent="center"
-        textAlign="center"
-        flexDir="column"
-      >
-        <Text fontSize="2.5rem" fontFamily="Assistant">
-          Welcome back,{" "}
-          <span style={{ fontWeight: 800, color: "#5c38b3" }}>
-            {userDoc?.name.name}!
-          </span>
-        </Text>
-
-        <Select
-          placeholder="Choose a deck"
-          onChange={handleOptionChange}
-          w="20rem"
-          ml="auto"
+      {mounted && (
+        <Flex
           mr="auto"
+          ml="auto"
           mt="2rem"
-          mb="2rem"
+          justifyContent="center"
+          textAlign="center"
+          flexDir="column"
         >
-          {value?.docs.map((doc) => {
-            // there has to be a better way to do this
-            const uid = (doc as any)._key.path.segments[8];
-            const title = (doc as any)._document.data.value.mapValue.fields
-              .title.stringValue;
-
-            return (
-              <option value={uid} key={uid}>
-                {title}
-              </option>
-            );
-          })}
-        </Select>
-
-        {currentDeck && (
-          <>
-            <Grid templateColumns="repeat(2, 12rem)" ml="auto" mr="auto">
-              <GridItem>
-                <Button mb="1rem" w="10rem">
-                  Study!
-                </Button>
-              </GridItem>
-              <GridItem>
-                <Button mb="2rem" w="10rem">
-                  Add a card
-                </Button>
-              </GridItem>
-            </Grid>
-            <DeckPreview currentUID={currentDeck} />{" "}
-          </>
-        )}
-      </Flex>
+          <Text fontSize="2.5rem" fontFamily="Assistant">
+            Welcome back,{" "}
+            <span style={{ fontWeight: 800, color: "#5c38b3" }}>
+              {userDoc?.name.name}!
+            </span>
+          </Text>
+          <Tabs align="center" variant="unstyled" mt="1rem">
+            <TabList>
+              <Tab ml="1rem" mr="1rem">
+                Your decks
+              </Tab>
+              <Tab ml="1rem" mr="1rem">
+                Statistics
+              </Tab>
+            </TabList>
+            <TabIndicator
+              mt="-1.5px"
+              height="2px"
+              bg="#5c38b3"
+              borderRadius="1px"
+            />
+            <TabPanels>
+              <TabPanel>
+                <DeckSelect />
+              </TabPanel>
+              <TabPanel>
+                <StatsView />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Flex>
+      )}
     </>
   );
 };

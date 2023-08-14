@@ -20,12 +20,11 @@ const RightContent: React.FC = () => {
       <Menu>
         <MenuButton
           as={Button}
-          // icon={<FaUserCircle />}
-          // isRound
           fontSize="min(1.5rem, 7.5vw)"
           fontFamily="Assistant"
           leftIcon={<FaUserCircle />}
           bg="transparent"
+          fontWeight="800"
         >
           Profile
         </MenuButton>

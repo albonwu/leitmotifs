@@ -33,7 +33,10 @@ const NameModal: React.FC = () => {
     doc(firestore, "users", user?.uid as string)
   );
 
-  useEffect(() => setIsOpen(!docLoading && !value?.name), [value?.name]);
+  useEffect(() => {
+    // console.log(!value?.name);
+    setIsOpen(!docLoading && !value?.name);
+  }, [value]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
