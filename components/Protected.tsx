@@ -8,13 +8,17 @@ type ProtectedProps = {
 };
 
 const Protected: React.FC<ProtectedProps> = ({ children }: ProtectedProps) => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [mounted, setMounted] = useState(false); // prevents HTML mismatch
 
   useEffect(() => {
-    !user && redirect("/");
+    !user && !loading && redirect("/");
     user && setMounted(true);
-  }, [user]);
+  }, [loading]);
+
+  if (!mounted) {
+    console.log("not mounted, redirecting");
+  }
 
   return <>{mounted && children}</>;
 };

@@ -3,8 +3,6 @@
 import {
   Flex,
   Button,
-  Text,
-  Select,
   Grid,
   GridItem,
   Menu,
@@ -17,25 +15,47 @@ import {
   CardHeader,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import DeckPreview from "./DeckPreview";
+import { BsPlusCircleFill } from "react-icons/bs";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 const DeckSelect: React.FC = () => {
   const [user] = useAuthState(auth);
   const [value] = useCollection(
     collection(firestore, "users", user?.uid as string, "decks")
   );
-
   const [currentDeck, setCurrentDeck] = useState<string>("" as string);
   const [buttonText, setButtonText] = useState<string>(
     "Choose a deck" as string
   );
+  const [newDeck, setNewDeck] = useState<string>("" as string);
+
   const handleOptionChange = (uid: string, title: string) => {
     setCurrentDeck(uid);
     setButtonText(title);
+  };
+
+  const handleNewDeckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setNewDeck(e.target.value);
+  };
+
+  const handleNewDeck = async () => {
+    const deckRef = await addDoc(
+      collection(firestore, "users", user?.uid as string, "decks"),
+      {
+        title: newDeck,
+      }
+    );
+    // const uid = (doc as any)._key.path.segments[8];
+    // setCurrentDeck(uid);
+    const docSnap = await getDoc(deckRef);
+    console.log(docSnap.data());
+    setButtonText("New deck");
   };
 
   return (
@@ -49,11 +69,30 @@ const DeckSelect: React.FC = () => {
       <Menu
       // onChange={handleOptionChange}
       >
-        <MenuButton as={Button} w="10rem" ml="auto" mr="auto" mb="1rem">
+        <MenuButton
+          as={Button}
+          rightIcon={<IoIosArrowDropdownCircle />}
+          w="10rem"
+          mt="1rem"
+          ml="auto"
+          mr="auto"
+          mb="1rem"
+        >
           {buttonText}
         </MenuButton>
-        <MenuList w="20rem" ml="auto" mr="auto" mt="2rem" mb="2rem">
-          <MenuItem onClick={() => handleOptionChange("", "New deck")}>
+        <MenuList
+          w="20rem"
+          ml="auto"
+          mr="auto"
+          mt=""
+          mb="2rem"
+          justifyContent="center"
+        >
+          <MenuItem
+            // icon={<BsPlusCircleFill fontSize="15px"/>}
+            onClick={() => handleOptionChange("", "New deck")}
+            fontWeight="600"
+          >
             New deck
           </MenuItem>
           {value?.docs.map((doc) => {
@@ -97,15 +136,16 @@ const DeckSelect: React.FC = () => {
         <Card w="30rem" mb="1rem" ml="auto" mr="auto" borderRadius="1rem">
           <CardHeader fontWeight="600">Create a new deck</CardHeader>
           <CardBody>
-            <form>
+            <form onSubmit={handleNewDeck}>
               <Input
                 variant="flushed"
                 placeholder="Name"
                 w="15rem"
                 ml="auto"
                 mr="auto"
+                onChange={handleNewDeckChange}
               />
-              <Button>Hello</Button>
+              <Button type="submit">Create</Button>
             </form>
           </CardBody>
         </Card>
