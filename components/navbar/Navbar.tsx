@@ -18,11 +18,19 @@ const Navbar: React.FC = () => {
   return (
     <>
       <Flex backgroundColor={"transparent"} mt="1rem" alignItems="center">
-        <Link href="/" passHref>
-          <Flex ml="2rem" height="4.5rem" maxW="50vw">
-            <Image src="/logo.svg" alt="Leitmotifs logo" />
-          </Flex>
-        </Link>
+        {user ? (
+          <Link href="/study" passHref>
+            <Flex ml="2rem" height="4.5rem" maxW="50vw">
+              <Image src="/logo.svg" alt="Leitmotifs logo" />
+            </Flex>
+          </Link>
+        ) : (
+          <Link href="/" passHref>
+            <Flex ml="2rem" height="4.5rem" maxW="50vw">
+              <Image src="/logo.svg" alt="Leitmotifs logo" />
+            </Flex>
+          </Link>
+        )}
         {mounted && <RightContent />}
       </Flex>
     </>

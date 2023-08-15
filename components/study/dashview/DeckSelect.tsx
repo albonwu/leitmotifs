@@ -14,14 +14,14 @@ import {
   CardBody,
   CardHeader,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import DeckPreview from "./DeckPreview";
-import { BsPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { redirect } from "next/navigation";
 
 const DeckSelect: React.FC = () => {
   const [user] = useAuthState(auth);
@@ -33,6 +33,12 @@ const DeckSelect: React.FC = () => {
     "Choose a deck" as string
   );
   const [newDeck, setNewDeck] = useState<string>("" as string);
+  const [toStudy, setToStudy] = useState<boolean>(false);
+
+  // idk why this is necessary but it is
+  useEffect(() => {
+    toStudy && redirect("/study?deck=" + currentDeck);
+  }, [toStudy]);
 
   const handleOptionChange = (uid: string, title: string) => {
     setCurrentDeck(uid);
@@ -44,18 +50,27 @@ const DeckSelect: React.FC = () => {
     setNewDeck(e.target.value);
   };
 
-  const handleNewDeck = async () => {
+  const handleNewDeck = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const deckRef = await addDoc(
       collection(firestore, "users", user?.uid as string, "decks"),
       {
         title: newDeck,
       }
     );
-    // const uid = (doc as any)._key.path.segments[8];
-    // setCurrentDeck(uid);
+
     const docSnap = await getDoc(deckRef);
-    console.log(docSnap.data());
-    setButtonText("New deck");
+    console.log(docSnap);
+    const uid = (docSnap as any)._key.path.segments[3];
+    const title = (docSnap as any)._document.data.value.mapValue.fields.title
+      .stringValue;
+    setCurrentDeck(uid);
+    setButtonText(title);
+  };
+
+  const handleStudy = () => {
+    console.log("redirecting to /study?deck=" + currentDeck);
+    setToStudy(true);
   };
 
   return (
@@ -71,8 +86,8 @@ const DeckSelect: React.FC = () => {
       >
         <MenuButton
           as={Button}
-          rightIcon={<IoIosArrowDropdownCircle />}
-          w="10rem"
+          rightIcon={<IoIosArrowDropdownCircle fontSize="1.2rem" />}
+          w="15rem"
           mt="1rem"
           ml="auto"
           mr="auto"
@@ -118,7 +133,7 @@ const DeckSelect: React.FC = () => {
         <>
           <Grid templateColumns="repeat(2, 12rem)" ml="auto" mr="auto">
             <GridItem>
-              <Button mb="1rem" w="10rem">
+              <Button mb="1rem" w="10rem" onClick={handleStudy}>
                 Study!
               </Button>
             </GridItem>

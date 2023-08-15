@@ -16,10 +16,6 @@ const Protected: React.FC<ProtectedProps> = ({ children }: ProtectedProps) => {
     user && setMounted(true);
   }, [loading]);
 
-  if (!mounted) {
-    console.log("not mounted, redirecting");
-  }
-
   return <>{mounted && children}</>;
 };
 

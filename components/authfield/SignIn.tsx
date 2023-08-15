@@ -16,7 +16,6 @@ const SignIn: React.FC = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [emailCopy, setEmailCopy] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     user && redirect("/study");
