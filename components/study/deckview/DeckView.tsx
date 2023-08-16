@@ -21,10 +21,14 @@ const DeckView: React.FC = () => {
 
   return (
     <>
-      {value ? <>hello from {value?.title}</> : <>deck not found</>}
-
-      <AddCard />
-      <Cards />
+      {value ? (
+        <>
+          <Text>{value?.title}</Text> 
+          <Cards />
+        </>
+      ) : (
+        <>Deck not found.</>
+      )}
     </>
   );
 };

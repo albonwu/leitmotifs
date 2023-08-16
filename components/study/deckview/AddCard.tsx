@@ -31,10 +31,6 @@ const AddCard: React.FC = () => {
   const [def, setDef] = useState("");
   const [user, loading] = useAuthState(auth);
 
-  const [value] = useDocumentDataOnce(
-    doc(firestore, "users", user?.uid as string, "decks", uid)
-  );
-
   const handleChangeTerm = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   };

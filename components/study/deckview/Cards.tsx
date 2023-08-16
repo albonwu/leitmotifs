@@ -31,9 +31,9 @@ const Cards: React.FC = () => {
           // there has to be a better way to do this
           const uid = (doc as any)._key.path.segments[10];
           const term = (doc as any)._document.data.value.mapValue.fields.term
-            .mapValue.fields.term.stringValue;
+            .stringValue;
           const def = (doc as any)._document.data.value.mapValue.fields
-            .definition.mapValue.fields.definition.stringValue;
+            .definition.stringValue;
 
           console.log(doc);
 

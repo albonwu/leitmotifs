@@ -23,7 +23,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import DeckPreview from "./DeckPreview";
-import DeckSelect from "./DeckSelect";
+import DeckSelect from "./deckselect/DeckSelect";
 import StatsView from "./StatsView";
 
 const DashView: React.FC = () => {

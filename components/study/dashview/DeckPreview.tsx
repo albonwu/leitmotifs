@@ -35,11 +35,12 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
     <>
       {cards?.docs.map((doc) => {
         // there has to be a better way to do this
+        console.log(doc);
         const uid = (doc as any)._key.path.segments[10];
         const term = (doc as any)._document.data.value.mapValue.fields.term
-          .mapValue.fields.term.stringValue;
+          .stringValue;
         const def = (doc as any)._document.data.value.mapValue.fields.definition
-          .mapValue.fields.definition.stringValue;
+          .stringValue;
 
         return (
           <Card

@@ -1,7 +1,7 @@
 import React from "react";
 
 const StatsView: React.FC = () => {
-    return <>hello from statsview!</>;
+    return <>Statistics coming soon!</>;
 }
 
 export default StatsView;

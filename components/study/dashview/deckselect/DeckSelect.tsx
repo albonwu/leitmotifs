@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Text,
   Flex,
   Button,
   Grid,
@@ -19,9 +20,13 @@ import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
-import DeckPreview from "./DeckPreview";
+import DeckPreview from "../DeckPreview";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { redirect } from "next/navigation";
+import NewDeck from "./NewDeck";
+import NewCardModal from "./NewCardModal";
+
+const newID: string = "3d7QiNIy1V4GbIS";
 
 const DeckSelect: React.FC = () => {
   const [user] = useAuthState(auth);
@@ -73,6 +78,10 @@ const DeckSelect: React.FC = () => {
     setToStudy(true);
   };
 
+  const showCurrent = currentDeck !== newID && currentDeck !== "";
+  const showNew = currentDeck === newID || currentDeck === "";
+  const empty = currentDeck === "";
+
   return (
     <Flex
       mr="auto"
@@ -81,9 +90,7 @@ const DeckSelect: React.FC = () => {
       textAlign="center"
       flexDir="column"
     >
-      <Menu
-      // onChange={handleOptionChange}
-      >
+      <Menu>
         <MenuButton
           as={Button}
           rightIcon={<IoIosArrowDropdownCircle fontSize="1.2rem" />}
@@ -105,7 +112,7 @@ const DeckSelect: React.FC = () => {
         >
           <MenuItem
             // icon={<BsPlusCircleFill fontSize="15px"/>}
-            onClick={() => handleOptionChange("", "New deck")}
+            onClick={() => handleOptionChange(newID, "New deck")}
             fontWeight="600"
           >
             New deck
@@ -129,7 +136,7 @@ const DeckSelect: React.FC = () => {
         </MenuList>
       </Menu>
 
-      {currentDeck && (
+      {showCurrent && (
         <>
           <Grid templateColumns="repeat(2, 12rem)" ml="auto" mr="auto">
             <GridItem>
@@ -138,32 +145,19 @@ const DeckSelect: React.FC = () => {
               </Button>
             </GridItem>
             <GridItem>
-              <Button mb="2rem" w="10rem">
-                Add a card
-              </Button>
+              <NewCardModal uid={currentDeck} />
             </GridItem>
           </Grid>
           <DeckPreview currentUID={currentDeck} />{" "}
         </>
       )}
-
-      {currentDeck === "" && (
-        <Card w="30rem" mb="1rem" ml="auto" mr="auto" borderRadius="1rem">
-          <CardHeader fontWeight="600">Create a new deck</CardHeader>
-          <CardBody>
-            <form onSubmit={handleNewDeck}>
-              <Input
-                variant="flushed"
-                placeholder="Name"
-                w="15rem"
-                ml="auto"
-                mr="auto"
-                onChange={handleNewDeckChange}
-              />
-              <Button type="submit">Create</Button>
-            </form>
-          </CardBody>
-        </Card>
+      {empty && (
+        <Text mb="1rem" fontWeight="600" fontFamily="Assistant">
+          OR
+        </Text>
+      )}
+      {showNew && (
+        <NewDeck newDeck={handleNewDeck} changeDeck={handleNewDeckChange} />
       )}
     </Flex>
   );

@@ -6,11 +6,17 @@ import React, { useEffect, useState } from "react";
 import Protected from "@/components/Protected";
 import DashView from "@/components/study/dashview/DashView";
 import DeckView from "@/components/study/deckview/DeckView";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import NameModal from "@/components/NameModal";
 
 const Study: React.FC = () => {
+  // const [user] = useAuthState(auth);
   const searchParams = useSearchParams();
+
+  // useEffect(() => {
+  //   !user && redirect("/");
+  // }, [user]);
+
   return (
     <Protected>
       {searchParams.get("deck") ? <DeckView /> : <DashView />}
