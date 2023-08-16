@@ -4,12 +4,16 @@ import { Flex, Button, Text, Input } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { ChangeEvent, useState } from "react";
 import { addDoc, collection, doc } from "firebase/firestore";
-import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import {
+  useCollectionDataOnce,
+  useDocumentDataOnce,
+} from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import { useSearchParams } from "next/navigation";
 import AddCard from "./AddCard";
 import Cards from "./Cards";
+import FlashCard from "./FlashCard";
 
 const DeckView: React.FC = () => {
   const searchParams = useSearchParams();
@@ -18,13 +22,26 @@ const DeckView: React.FC = () => {
   const [value] = useDocumentDataOnce(
     doc(firestore, "users", user?.uid as string, "decks", uid)
   );
+  const [cards] = useCollectionDataOnce(
+    collection(firestore, "users", user?.uid as string, "decks", uid, "cards")
+  );
 
   return (
     <>
       {value ? (
         <>
-          <Text>{value?.title}</Text> 
-          <Cards />
+          <Text>{value?.title}</Text>
+          {/* <Cards /> */}
+          {cards?.map((card) => {
+            return (
+              // TODO: add a unique key
+              <FlashCard
+                key={card.term}
+                term={card.term}
+                def={card.definition}
+              />
+            );
+          })}
         </>
       ) : (
         <>Deck not found.</>
