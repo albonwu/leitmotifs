@@ -9,6 +9,17 @@ type FlashCardProps = {
   def: string;
 };
 
+const throttle = (func: Function) => {
+  let prev = 0;
+  return (...args: any[]) => {
+    const now = new Date().getTime();
+    if (now - prev > 150) {
+      prev = now;
+      return func(...args);
+    }
+  };
+};
+
 const FlashCard: React.FC<FlashCardProps> = ({ term, def }: FlashCardProps) => {
   const [flipped, setFlipped] = useState<boolean>(false);
   const [showTerm, setShowTerm] = useState<boolean>(true);
@@ -24,28 +35,35 @@ const FlashCard: React.FC<FlashCardProps> = ({ term, def }: FlashCardProps) => {
       initial={{ transform: "rotateX(0deg)" }}
       animate={{ transform: flipped ? "rotateX(180deg)" : "rotateX(0deg)" }}
       transition={{ type: "spring", duration: 1 }}
+      // onAnimationComplete={() => setTimeout(() => setShowTerm(!showTerm), 150)}
     >
       <Card
-        w="30rem"
-        h="10rem"
+        w="40rem"
+        h="20rem"
+        ml="auto"
+        mr="auto"
         display={showTerm ? "block" : "none"}
-        onClick={flipCard}
+        onClick={throttle(flipCard)}
+        // sx={{ backfaceVisibility: "hidden" }}
         // _hover={{ boxShadow: "sm" }}
       >
         <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-          <Text>{term}</Text>
+          <Text fontSize="1.5rem">{term}</Text>
         </Flex>
       </Card>
       <Card
-        w="30rem"
-        h="10rem"
+        w="40rem"
+        h="20rem"
+        ml="auto"
+        mr="auto"
         display={showTerm ? "none" : "block"}
         transform="rotateX(180deg)"
-        onClick={flipCard}
+        onClick={throttle(flipCard)}
+        // sx={{ backfaceVisibility: "hidden" }}
         // _hover={{ boxShadow: "sm" }}
       >
         <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-          <Text>{def}</Text>
+          <Text fontSize="1.5rem">{def}</Text>
         </Flex>
       </Card>
     </motion.div>

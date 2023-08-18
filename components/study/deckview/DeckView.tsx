@@ -29,8 +29,16 @@ const DeckView: React.FC = () => {
   return (
     <>
       {value ? (
-        <>
-          <Text>{value?.title}</Text>
+        <Flex
+          ml="auto"
+          mr="auto"
+          justifyContent="center"
+          flexDir="column"
+          textAlign="center"
+        >
+          <Text fontSize="2rem" fontWeight="800">
+            {value?.title}
+          </Text>
           {/* <Cards /> */}
           {cards?.map((card) => {
             return (
@@ -42,7 +50,7 @@ const DeckView: React.FC = () => {
               />
             );
           })}
-        </>
+        </Flex>
       ) : (
         <>Deck not found.</>
       )}
