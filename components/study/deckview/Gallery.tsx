@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FlashCard from "./FlashCard";
 import { Text } from "@chakra-ui/react";
+import FinishMessage from "./FinishMessage";
 
 type GalleryProps = {
   uid: string;
@@ -8,7 +9,7 @@ type GalleryProps = {
 };
 const Gallery: React.FC<GalleryProps> = ({ uid, cards }: GalleryProps) => {
   const [curInd, setCurInd] = useState<number>(0);
-  if (!cards) return <>No cards left. Good work!</>;
+  if (!cards) return <FinishMessage />;
   var card = cards[curInd];
   return (
     <>
@@ -28,26 +29,8 @@ const Gallery: React.FC<GalleryProps> = ({ uid, cards }: GalleryProps) => {
           />
         </>
       ) : (
-        <>No cards left. Good work!</>
+        <FinishMessage />
       )}
-
-      {/* {cards.map((card: any) => {
-        return (
-          // TODO: add a unique key
-          <>
-            <Text fontSize="1.5rem" fontWeight="600" mt="0.5rem" mb="2rem">
-              Box {card.data().box}
-            </Text>
-            <FlashCard
-              key={card.data().term}
-              term={card.data().term}
-              def={card.data().definition}
-              deckUID={uid}
-              cardUID={card.id}
-            />
-          </>
-        );
-      })} */}
     </>
   );
 };

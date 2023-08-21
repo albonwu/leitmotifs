@@ -1,13 +1,8 @@
 "use client";
 
-import { Flex, Button, Text, Input } from "@chakra-ui/react";
-import Link from "next/link";
+import { Button, Input } from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
-import { addDoc, collection, doc } from "firebase/firestore";
-import {
-  useCollectionData,
-  useDocumentDataOnce,
-} from "react-firebase-hooks/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import { useSearchParams } from "next/navigation";
