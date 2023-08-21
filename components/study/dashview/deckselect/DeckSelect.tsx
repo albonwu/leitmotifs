@@ -74,7 +74,6 @@ const DeckSelect: React.FC = () => {
   };
 
   const handleStudy = () => {
-    console.log("redirecting to /study?deck=" + currentDeck);
     setToStudy(true);
   };
 

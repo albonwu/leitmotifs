@@ -8,6 +8,7 @@ type GalleryProps = {
 };
 const Gallery: React.FC<GalleryProps> = ({ uid, cards }: GalleryProps) => {
   const [curInd, setCurInd] = useState<number>(0);
+  if (!cards) return <>No cards left. Good work!</>;
   var card = cards[curInd];
   return (
     <>

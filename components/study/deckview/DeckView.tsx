@@ -32,7 +32,8 @@ const DeckView: React.FC = () => {
     const currentDate = new Date();
     if (!lastDate) return true;
     const diff = Math.abs(currentDate.getTime() - lastDate.toDate().getTime());
-    const diffDays = Math.ceil(diff / (1000 * 60));
+    const diffDays = Math.floor(diff / (1000 * 60));
+    console.log(diffDays + " minutes have passed since " + card.data().term);
     return diffDays >= Math.pow(2, card.data().box - 1);
   });
 
