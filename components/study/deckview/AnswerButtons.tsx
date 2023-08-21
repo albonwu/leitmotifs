@@ -2,10 +2,14 @@ import { Button, Flex } from "@chakra-ui/react";
 import React from "react";
 
 type AnswerButtonsProps = {
-  cardUID: string;
+  box: number;
+  ind: number;
+  handleNext: Function;
 };
 const AnswerButtons: React.FC<AnswerButtonsProps> = ({
-  cardUID,
+  box,
+  ind,
+  handleNext,
 }: AnswerButtonsProps) => {
   return (
     <>
@@ -15,6 +19,7 @@ const AnswerButtons: React.FC<AnswerButtonsProps> = ({
           w="8rem"
           _hover={{ bgColor: "green.400" }}
           color="#fbfaf5"
+          onClick={() => handleNext(Math.min(box + 1, 5), ind + 1)}
         >
           Right
         </Button>
@@ -23,6 +28,7 @@ const AnswerButtons: React.FC<AnswerButtonsProps> = ({
           w="8rem"
           _hover={{ bgColor: "red.400" }}
           color="#fbfaf5"
+          onClick={() => handleNext(Math.max(box - 1, 1), ind + 1)}
         >
           Wrong
         </Button>

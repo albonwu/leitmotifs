@@ -14,6 +14,7 @@ import { firestore, auth } from "@/firebase/clientApp";
 import { useSearchParams } from "next/navigation";
 import FlashCard from "./FlashCard";
 import AnswerButtons from "./AnswerButtons";
+import Gallery from "./Gallery";
 
 const DeckView: React.FC = () => {
   const searchParams = useSearchParams();
@@ -25,8 +26,15 @@ const DeckView: React.FC = () => {
   const [cards] = useCollectionOnce(
     collection(firestore, "users", user?.uid as string, "decks", uid, "cards")
   );
-  
-  const [showButtons, setShowButtons] = useState<boolean>(false);
+
+  const currentCards = cards?.docs.filter((card) => {
+    const lastDate = card.data().lastDate;
+    const currentDate = new Date();
+    if (!lastDate) return true;
+    const diff = Math.abs(currentDate.getTime() - lastDate.toDate().getTime());
+    const diffDays = Math.ceil(diff / (1000 * 60));
+    return diffDays >= Math.pow(2, card.data().box - 1);
+  });
 
   return (
     <>
@@ -42,25 +50,7 @@ const DeckView: React.FC = () => {
           <Text fontSize="2rem" fontWeight="800">
             {value?.title}
           </Text>
-          {/* <Cards /> */}
-          {cards?.docs.map((card) => {
-            return (
-              // TODO: add a unique key
-              <>
-                <Text fontSize="1.5rem" fontWeight="600" mt="0.5rem" mb="2rem">
-                  Box {card.data().box}
-                </Text>
-                <FlashCard
-                  key={card.data().term}
-                  term={card.data().term}
-                  def={card.data().definition}
-                  setShow={setShowButtons}
-                />
-
-                {showButtons && <AnswerButtons cardUID={card.id} />}
-              </>
-            );
-          })}
+          <Gallery uid={uid} cards={currentCards} />
         </Flex>
       ) : (
         <>Deck not found.</>

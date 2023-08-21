@@ -1,14 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, Card, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import AnswerButtons from "./AnswerButtons";
+import {
+  useDocumentDataOnce,
+  useDocumentOnce,
+} from "react-firebase-hooks/firestore";
+import { auth, firestore } from "@/firebase/clientApp";
+import { doc, updateDoc } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 type FlashCardProps = {
   term: string;
   def: string;
-  setShow: Function;
+  deckUID: string;
+  cardUID: string;
+  ind: number;
+  changeInd: Function;
 };
 
 const throttle = (func: Function) => {
@@ -22,16 +32,50 @@ const throttle = (func: Function) => {
   };
 };
 
-const FlashCard: React.FC<FlashCardProps> = ({ term, def, setShow }: FlashCardProps) => {
+const FlashCard: React.FC<FlashCardProps> = ({
+  term,
+  def,
+  deckUID,
+  cardUID,
+  ind,
+  changeInd,
+}: FlashCardProps) => {
   const [flipped, setFlipped] = useState<boolean>(false);
   const [showTerm, setShowTerm] = useState<boolean>(true);
+  const [showButtons, setShowButtons] = useState<boolean>(false);
+  const [user] = useAuthState(auth);
+  const docRef = doc(
+    firestore,
+    "users",
+    user?.uid as string,
+    "decks",
+    deckUID,
+    "cards",
+    cardUID
+  );
+  const [value] = useDocumentOnce(docRef);
+  const [newBox, setNewBox] = useState<number>(1);
+
   const flipCard = () => {
     setFlipped(!flipped);
-    setShow(true);
+    setShowButtons(true);
     // halfway through regular transition is duration * 0.35
     // spring transition: duration * 0.15
     setTimeout(() => setShowTerm(!showTerm), 150);
   };
+
+  useEffect(() => {
+    setNewBox(value?.data()?.box as number);
+  }, [value]);
+
+  const handleNext = async (newBox: number, newInd: number) => {
+    setShowButtons(false);
+    changeInd(ind + 1);
+    await updateDoc(docRef, { lastDate: new Date(), box: newBox });
+    setFlipped(false);
+    setShowTerm(true);
+  };
+
   return (
     <>
       <motion.div
@@ -70,6 +114,9 @@ const FlashCard: React.FC<FlashCardProps> = ({ term, def, setShow }: FlashCardPr
           </Flex>
         </Card>
       </motion.div>
+      {showButtons && (
+        <AnswerButtons box={newBox} ind={ind} handleNext={handleNext} />
+      )}
     </>
     // </Card>
   );
