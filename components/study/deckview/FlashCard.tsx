@@ -82,7 +82,6 @@ const FlashCard: React.FC<FlashCardProps> = ({
         initial={{ transform: "rotateX(0deg)" }}
         animate={{ transform: flipped ? "rotateX(180deg)" : "rotateX(0deg)" }}
         transition={{ type: "spring", duration: 1 }}
-        // onAnimationComplete={() => setTimeout(() => setShowTerm(!showTerm), 150)}
       >
         <Card
           w="40rem"
@@ -91,8 +90,6 @@ const FlashCard: React.FC<FlashCardProps> = ({
           mr="auto"
           display={showTerm ? "block" : "none"}
           onClick={throttle(flipCard)}
-          // sx={{ backfaceVisibility: "hidden" }}
-          // _hover={{ boxShadow: "sm" }}
         >
           <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
             <Text fontSize="1.5rem">{term}</Text>
@@ -106,8 +103,6 @@ const FlashCard: React.FC<FlashCardProps> = ({
           display={showTerm ? "none" : "block"}
           transform="rotateX(180deg)"
           onClick={throttle(flipCard)}
-          // sx={{ backfaceVisibility: "hidden" }}
-          // _hover={{ boxShadow: "sm" }}
         >
           <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
             <Text fontSize="1.5rem">{def}</Text>
@@ -118,7 +113,6 @@ const FlashCard: React.FC<FlashCardProps> = ({
         <AnswerButtons box={newBox} ind={ind} handleNext={handleNext} />
       )}
     </>
-    // </Card>
   );
 };
 

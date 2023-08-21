@@ -21,21 +21,6 @@ type NCMProps = {
   uid: string;
 };
 
-// const handleSubmit = async (
-//   uid: string,
-//   deckUID: string,
-//   term: string,
-//   def: string
-// ) => {
-//   await addDoc(collection(firestore, "users", uid, "decks", deckUID, "cards"), {
-//     term: term,
-//     definition: def,
-//     box: 1,
-//   });
-// };
-
-// const handleSubmit = () => {};
-
 const NewCardModal: React.FC<NCMProps> = (props: NCMProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [term, setTerm] = useState<string>("");

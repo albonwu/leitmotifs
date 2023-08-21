@@ -24,7 +24,7 @@ const AddCard: React.FC = () => {
   const uid = searchParams.get("deck") as string;
   const [term, setTerm] = useState("");
   const [def, setDef] = useState("");
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const handleChangeTerm = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);

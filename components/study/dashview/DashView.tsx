@@ -32,7 +32,6 @@ const DashView: React.FC = () => {
     doc(firestore, "users", user?.uid as string)
   );
   const [mounted, setMounted] = useState<boolean>(false);
-  // console.log(!userDoc?.name);
   useEffect(() => {
     setMounted(userDoc?.name);
   }, [userDoc]);

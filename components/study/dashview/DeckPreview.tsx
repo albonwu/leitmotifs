@@ -1,11 +1,10 @@
 import { auth, firestore } from "@/firebase/clientApp";
 import { Card, CardBody, Divider } from "@chakra-ui/react";
 import { collection, doc } from "firebase/firestore";
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   useCollection,
-  useDocument,
   useDocumentDataOnce,
 } from "react-firebase-hooks/firestore";
 import { Text } from "@chakra-ui/react";
@@ -16,9 +15,6 @@ type DeckPreviewProps = {
 
 const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
   const [user] = useAuthState(auth);
-  const [value, loading] = useDocumentDataOnce(
-    doc(firestore, "users", user?.uid as string, "decks", props.currentUID)
-  );
   const [cards] = useCollection(
     collection(
       firestore,
@@ -29,7 +25,6 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
       "cards"
     )
   );
-  //   useEffect(() => console.log(cards), [cards]);
 
   return (
     <>

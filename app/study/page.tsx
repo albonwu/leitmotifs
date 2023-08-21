@@ -10,13 +10,16 @@ import { redirect, useSearchParams } from "next/navigation";
 import NameModal from "@/components/NameModal";
 
 const Study: React.FC = () => {
-  // const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const searchParams = useSearchParams();
 
-  // useEffect(() => {
-  //   !user && redirect("/");
-  // }, [user]);
-
+  useEffect(() => {
+    !user && redirect("/");
+  }, [user]);
+  
+  if (!user) {
+    return null;
+  }
   return (
     <Protected>
       {searchParams.get("deck") ? <DeckView /> : <DashView />}

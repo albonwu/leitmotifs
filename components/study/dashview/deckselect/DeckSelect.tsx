@@ -10,10 +10,6 @@ import {
   MenuItem,
   MenuList,
   MenuButton,
-  Input,
-  Card,
-  CardBody,
-  CardHeader,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
