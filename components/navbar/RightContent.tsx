@@ -24,7 +24,7 @@ const RightContent: React.FC = () => {
           fontFamily="Assistant"
           leftIcon={<FaUserCircle />}
           bg="transparent"
-          fontWeight="800"
+          fontWeight="600"
         >
           Profile
         </MenuButton>
