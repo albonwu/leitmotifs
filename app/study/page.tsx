@@ -10,11 +10,11 @@ import { redirect, useSearchParams } from "next/navigation";
 import NameModal from "@/components/NameModal";
 
 const Study: React.FC = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    !user && redirect("/");
+    !user && !loading && redirect("/");
   }, [user]);
   
   if (!user) {
