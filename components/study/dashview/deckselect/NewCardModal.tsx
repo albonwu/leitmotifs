@@ -2,6 +2,7 @@
 
 import {
   Button,
+  IconButton,
   Input,
   Modal,
   ModalBody,
@@ -16,6 +17,7 @@ import React, { useState } from "react";
 import { firestore, auth } from "@/firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { addDoc, collection, doc } from "firebase/firestore";
+import { AiOutlinePlus } from "react-icons/ai";
 
 type NCMProps = {
   uid: string;
@@ -50,9 +52,15 @@ const NewCardModal: React.FC<NCMProps> = (props: NCMProps) => {
 
   return (
     <>
-      <Button onClick={onOpen} mb="2rem" w="10rem">
-        Add a card
-      </Button>
+      <IconButton
+        onClick={onOpen}
+        variant="outline"
+        aria-label="Add a card"
+        icon={<AiOutlinePlus />}
+        color="lmPurple.100"
+        colorScheme="lmPurple"
+        _hover={{ color: "white", backgroundColor: "lmPurple.100" }}
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

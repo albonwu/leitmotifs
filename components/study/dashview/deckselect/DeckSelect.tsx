@@ -21,6 +21,8 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { redirect } from "next/navigation";
 import NewDeck from "./NewDeck";
 import NewCardModal from "./NewCardModal";
+import DeleteCardModal from "./DeleteCardModal";
+import EditCardModal from "./EditCardModal";
 
 const newID: string = "3d7QiNIy1V4GbIS";
 
@@ -133,17 +135,33 @@ const DeckSelect: React.FC = () => {
 
       {showCurrent && (
         <>
-          <Grid templateColumns="repeat(2, 12rem)" ml="auto" mr="auto">
-            <GridItem>
-              <Button mb="1rem" w="10rem" onClick={handleStudy}>
-                Study!
-              </Button>
-            </GridItem>
+          <Button
+            mt="1rem"
+            mb="1.5rem"
+            ml="auto"
+            mr="auto"
+            w="15rem"
+            h="4rem"
+            fontSize="1.2rem"
+            bgColor="lmPurple.100"
+            color="#ffffff"
+            onClick={handleStudy}
+            _hover={{ bgColor: "lmPurple.50" }}
+          >
+            Study!
+          </Button>
+          <Grid templateColumns="repeat(3, 5rem)" mb="2.5rem" ml="auto" mr="auto">
             <GridItem>
               <NewCardModal uid={currentDeck} />
             </GridItem>
+            <GridItem>
+              <EditCardModal />
+            </GridItem>
+            <GridItem>
+              <DeleteCardModal />
+            </GridItem>
           </Grid>
-          <DeckPreview currentUID={currentDeck} />{" "}
+          <DeckPreview currentUID={currentDeck} />
         </>
       )}
       {empty && (
