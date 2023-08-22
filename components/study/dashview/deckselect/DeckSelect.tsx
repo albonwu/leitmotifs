@@ -21,8 +21,8 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { redirect } from "next/navigation";
 import NewDeck from "./NewDeck";
 import NewCardModal from "./NewCardModal";
-import DeleteCardModal from "./DeleteCardModal";
-import EditCardModal from "./EditCardModal";
+import DeleteDeckModal from "./DeleteDeckModal";
+import EditDeckModal from "./EditDeckModal";
 
 const newID: string = "3d7QiNIy1V4GbIS";
 
@@ -108,7 +108,6 @@ const DeckSelect: React.FC = () => {
           justifyContent="center"
         >
           <MenuItem
-            // icon={<BsPlusCircleFill fontSize="15px"/>}
             onClick={() => handleOptionChange(newID, "New deck")}
             fontWeight="600"
           >
@@ -150,15 +149,15 @@ const DeckSelect: React.FC = () => {
           >
             Study!
           </Button>
-          <Grid templateColumns="repeat(3, 5rem)" mb="2.5rem" ml="auto" mr="auto">
+          <Grid templateColumns="repeat(3, 5rem)" mb="2rem" ml="auto" mr="auto">
             <GridItem>
               <NewCardModal uid={currentDeck} />
             </GridItem>
             <GridItem>
-              <EditCardModal />
+              <EditDeckModal uid={currentDeck} setButtonText={setButtonText} />
             </GridItem>
             <GridItem>
-              <DeleteCardModal />
+              <DeleteDeckModal />
             </GridItem>
           </Grid>
           <DeckPreview currentUID={currentDeck} />

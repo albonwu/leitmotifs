@@ -2,7 +2,7 @@ import { IconButton } from "@chakra-ui/react";
 import React from "react";
 import { BsTrash } from "react-icons/bs";
 
-const DeleteCardModal: React.FC = () => {
+const DeleteDeckModal: React.FC = () => {
   return (
     <>
       <IconButton
@@ -17,4 +17,4 @@ const DeleteCardModal: React.FC = () => {
   );
 };
 
-export default DeleteCardModal;
+export default DeleteDeckModal;
