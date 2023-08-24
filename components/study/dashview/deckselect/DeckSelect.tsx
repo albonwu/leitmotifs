@@ -157,7 +157,11 @@ const DeckSelect: React.FC = () => {
               <EditDeckModal uid={currentDeck} setButtonText={setButtonText} />
             </GridItem>
             <GridItem>
-              <DeleteDeckModal />
+              <DeleteDeckModal
+                uid={currentDeck}
+                setDeck={setCurrentDeck}
+                setButtonText={setButtonText}
+              />
             </GridItem>
           </Grid>
           <DeckPreview currentUID={currentDeck} />
