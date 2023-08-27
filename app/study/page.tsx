@@ -11,19 +11,23 @@ import NameModal from "@/components/NameModal";
 
 const Study: React.FC = () => {
   const [user, loading] = useAuthState(auth);
+  const [rerender, setRerender] = useState(false);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     !user && !loading && redirect("/");
   }, [user]);
-  
+
+  useEffect(() => console.log(rerender), [rerender]);
+
   if (!user) {
     return null;
   }
+
   return (
     <Protected>
       {searchParams.get("deck") ? <DeckView /> : <DashView />}
-      <NameModal />
+      <NameModal reload={setRerender} />
     </Protected>
   );
 };

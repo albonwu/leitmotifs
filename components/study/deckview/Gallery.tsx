@@ -6,8 +6,9 @@ import FinishMessage from "./FinishMessage";
 type GalleryProps = {
   uid: string;
   cards: any;
+  setWrongCards: Function;
 };
-const Gallery: React.FC<GalleryProps> = ({ uid, cards }: GalleryProps) => {
+const Gallery: React.FC<GalleryProps> = ({ uid, cards, setWrongCards }: GalleryProps) => {
   const [curInd, setCurInd] = useState<number>(0);
   if (!cards) return <FinishMessage />;
   var card = cards[curInd];
@@ -26,6 +27,7 @@ const Gallery: React.FC<GalleryProps> = ({ uid, cards }: GalleryProps) => {
             cardUID={card.id}
             ind={curInd}
             changeInd={setCurInd}
+            setWrongCards={setWrongCards}
           />
         </>
       ) : (

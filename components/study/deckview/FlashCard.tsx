@@ -19,6 +19,7 @@ type FlashCardProps = {
   cardUID: string;
   ind: number;
   changeInd: Function;
+  setWrongCards: Function;
 };
 
 const throttle = (func: Function) => {
@@ -39,6 +40,7 @@ const FlashCard: React.FC<FlashCardProps> = ({
   cardUID,
   ind,
   changeInd,
+  setWrongCards,
 }: FlashCardProps) => {
   const [flipped, setFlipped] = useState<boolean>(false);
   const [showTerm, setShowTerm] = useState<boolean>(true);
@@ -110,7 +112,13 @@ const FlashCard: React.FC<FlashCardProps> = ({
         </Card>
       </motion.div>
       {showButtons && (
-        <AnswerButtons box={newBox} ind={ind} handleNext={handleNext} />
+        <AnswerButtons
+          box={newBox}
+          uid={cardUID}
+          ind={ind}
+          handleNext={handleNext}
+          setWrongCards={setWrongCards}
+        />
       )}
     </>
   );

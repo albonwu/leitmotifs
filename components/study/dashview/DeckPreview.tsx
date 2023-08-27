@@ -31,7 +31,6 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
   return (
     <>
       {cards?.docs.map((doc) => {
-        // there has to be a better way to do this
         const uid = doc.id;
         const term = doc.data().term;
         const def = doc.data().definition;
@@ -48,7 +47,6 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
           >
             <CardBody key={uid}>
               <Text fontWeight="800"> {term} </Text>
-
               <br />
               {def}
               <br />

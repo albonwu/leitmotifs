@@ -17,14 +17,22 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 
-const handleNameSubmit = async (uid: string, name: string) => {
+type NMTypes = {
+  reload: Function;
+};
+
+const handleNameSubmit = async (
+  uid: string,
+  name: string,
+  reload: Function
+) => {
   const userRef = doc(firestore, "users", uid);
   await updateDoc(userRef, {
     name: { name },
   });
 };
 
-const NameModal: React.FC = () => {
+const NameModal: React.FC<NMTypes> = ({ reload }: NMTypes) => {
   const [user] = useAuthState(auth);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { onClose } = useDisclosure();
@@ -55,7 +63,10 @@ const NameModal: React.FC = () => {
             <Button
               bg="#5c38b3"
               color="white"
-              onClick={() => handleNameSubmit(user?.uid as string, name)}
+              onClick={() => {
+                handleNameSubmit(user?.uid as string, name, reload);
+                reload(true);
+              }}
               _hover={{ bg: "#8450ff" }}
             >
               Submit

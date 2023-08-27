@@ -7,6 +7,7 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
 import { User } from "firebase/auth";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { redirect } from "next/navigation";
 
 const SignUp: React.FC = () => {
   const [signUp, setSignUp] = useState({
@@ -49,6 +50,7 @@ const SignUp: React.FC = () => {
   useEffect(() => {
     if (user) {
       createUserDocument(user.user);
+      redirect("/study");
     }
   }, [user]);
 

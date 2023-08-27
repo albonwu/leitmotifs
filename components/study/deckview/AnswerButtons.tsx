@@ -4,12 +4,16 @@ import React from "react";
 type AnswerButtonsProps = {
   box: number;
   ind: number;
+  uid: string;
   handleNext: Function;
+  setWrongCards: Function;
 };
 const AnswerButtons: React.FC<AnswerButtonsProps> = ({
   box,
+  uid,
   ind,
   handleNext,
+  setWrongCards,
 }: AnswerButtonsProps) => {
   return (
     <Flex w="100%" gap="8rem" justifyContent="center" mt="2rem">
@@ -27,7 +31,10 @@ const AnswerButtons: React.FC<AnswerButtonsProps> = ({
         w="8rem"
         _hover={{ bgColor: "red.400" }}
         color="#fbfaf5"
-        onClick={() => handleNext(Math.max(box - 1, 1), ind + 1)}
+        onClick={() => {
+          handleNext(Math.max(box - 1, 1), ind + 1);
+          setWrongCards((prev: any) => [...prev, uid]);
+        }}
       >
         Wrong
       </Button>

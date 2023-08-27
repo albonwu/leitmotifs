@@ -33,6 +33,8 @@ const DeckView: React.FC = () => {
     return diffDays >= Math.pow(2, card.data().box - 1);
   });
 
+  // console.log(wrongCards);
+
   return (
     <>
       {value ? (
@@ -47,7 +49,11 @@ const DeckView: React.FC = () => {
           <Text fontSize="2rem" fontWeight="800">
             {value?.title}
           </Text>
-          <Gallery uid={uid} cards={currentCards} />
+          <Gallery
+            uid={uid}
+            cards={currentCards}
+            setWrongCards={setWrongCards}
+          />
         </Flex>
       ) : (
         <>Deck not found.</>

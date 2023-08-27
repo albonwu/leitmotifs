@@ -16,10 +16,7 @@ import {
 } from "@chakra-ui/react";
 import React, { use, useEffect, useState } from "react";
 import { addDoc, collection, doc } from "firebase/firestore";
-import {
-  useCollection,
-  useDocumentDataOnce,
-} from "react-firebase-hooks/firestore";
+import { useCollection, useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firestore, auth } from "@/firebase/clientApp";
 import DeckPreview from "./DeckPreview";
@@ -28,7 +25,7 @@ import StatsView from "./StatsView";
 
 const DashView: React.FC = () => {
   const [user] = useAuthState(auth);
-  const [userDoc] = useDocumentDataOnce(
+  const [userDoc] = useDocumentData(
     doc(firestore, "users", user?.uid as string)
   );
   const [mounted, setMounted] = useState<boolean>(false);
