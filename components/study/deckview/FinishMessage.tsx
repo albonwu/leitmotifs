@@ -15,6 +15,9 @@ const FinishMessage: React.FC = () => {
         <Text mt="2rem" fontSize="1.5rem" fontWeight="600">
           No cards left. Good work!
         </Text>
+        {/* <Text mt="2rem" fontSize="1.5rem" fontWeight="600">
+          When you're ready, review the cards you missed.
+        </Text> */}
         <Link href="/study">Return to dashboard</Link>
       </Flex>
     </>

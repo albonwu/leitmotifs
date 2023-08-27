@@ -1,7 +1,7 @@
 "use client";
 
 import { Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { collection, doc } from "firebase/firestore";
 import {
   useCollectionOnce,
@@ -22,6 +22,7 @@ const DeckView: React.FC = () => {
   const [cards] = useCollectionOnce(
     collection(firestore, "users", user?.uid as string, "decks", uid, "cards")
   );
+  const [wrongCards, setWrongCards] = useState<string[]>([]);
 
   const currentCards = cards?.docs.filter((card) => {
     const lastDate = card.data().lastDate;

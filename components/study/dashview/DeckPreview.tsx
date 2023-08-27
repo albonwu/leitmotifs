@@ -1,5 +1,5 @@
 import { auth, firestore } from "@/firebase/clientApp";
-import { Card, CardBody, Divider } from "@chakra-ui/react";
+import { Badge, Card, CardBody, Divider } from "@chakra-ui/react";
 import { collection, doc } from "firebase/firestore";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +12,8 @@ import { Text } from "@chakra-ui/react";
 type DeckPreviewProps = {
   currentUID: string;
 };
+
+const colors = ["red", "orange", "yellow", "green", "blue"];
 
 const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
   const [user] = useAuthState(auth);
@@ -30,11 +32,10 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
     <>
       {cards?.docs.map((doc) => {
         // there has to be a better way to do this
-        const uid = (doc as any)._key.path.segments[10];
-        const term = (doc as any)._document.data.value.mapValue.fields.term
-          .stringValue;
-        const def = (doc as any)._document.data.value.mapValue.fields.definition
-          .stringValue;
+        const uid = doc.id;
+        const term = doc.data().term;
+        const def = doc.data().definition;
+        const box: number = doc.data().box;
 
         return (
           <Card
@@ -47,8 +48,13 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
           >
             <CardBody key={uid}>
               <Text fontWeight="800"> {term} </Text>
+
               <br />
               {def}
+              <br />
+              <Badge colorScheme={colors[box - 1]} mt="1rem">
+                Box {box}
+              </Badge>
             </CardBody>
           </Card>
         );
