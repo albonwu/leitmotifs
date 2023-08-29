@@ -55,9 +55,8 @@ const DeleteDeckModal: React.FC<DDMProps> = ({
       <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize="1.5rem">Delete deck?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody fontSize="1.5rem" fontWeight="600" mt="1rem">Delete deck?</ModalBody>
           <ModalFooter>
             <Button
               bgColor="lmPurple.100"

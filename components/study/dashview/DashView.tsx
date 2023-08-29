@@ -50,7 +50,7 @@ const DashView: React.FC = () => {
               {userDoc?.name.name}!
             </span>
           </Text>
-          <Tabs align="center" variant="unstyled" mt="1rem">
+          <Tabs align="center" variant="unstyled" mt="0.5rem">
             <TabList>
               <Tab ml="1rem" mr="1rem">
                 Your decks

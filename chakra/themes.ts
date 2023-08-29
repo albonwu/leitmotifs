@@ -19,6 +19,7 @@ const theme = extendTheme({
     },
     lmGold: {
       50: "#fff6d3",
+      75: "#ffe057",
       100: "#ffc14d",
       200: "#b39836",
     },

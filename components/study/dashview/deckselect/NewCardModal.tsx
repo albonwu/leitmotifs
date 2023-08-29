@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Textarea,
@@ -75,11 +76,20 @@ const NewCardModal: React.FC<NCMProps> = (props: NCMProps) => {
                 onChange={handleChange}
                 mt="0.5rem"
               />
-              <Button type="submit" mt="1rem">
-                Add
-              </Button>
             </form>
           </ModalBody>
+          <ModalFooter>
+            <Button
+              type="submit"
+              bgColor="lmPurple.100"
+              color="white"
+              mr="1rem"
+              _hover={{ backgroundColor: "lmPurple.50" }}
+            >
+              Add
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

@@ -22,7 +22,15 @@ const NewDeck: React.FC<NewDeckProps> = (props: NewDeckProps) => {
             mr="auto"
             onChange={props.changeDeck}
           />
-          <Button type="submit">Create</Button>
+          <Button
+            bgColor="lmGold.100"
+            color="black"
+            ml="1rem"
+            type="submit"
+            _hover={{ bgColor: "lmGold.75" }}
+          >
+            Create
+          </Button>
         </form>
       </CardBody>
     </Card>

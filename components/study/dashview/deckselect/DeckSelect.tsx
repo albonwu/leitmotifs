@@ -92,10 +92,9 @@ const DeckSelect: React.FC = () => {
           as={Button}
           rightIcon={<IoIosArrowDropdownCircle fontSize="1.2rem" />}
           w="15rem"
-          mt="1rem"
+          mt="0.5rem"
           ml="auto"
           mr="auto"
-          mb="1rem"
         >
           {buttonText}
         </MenuButton>
@@ -103,7 +102,7 @@ const DeckSelect: React.FC = () => {
           w="20rem"
           ml="auto"
           mr="auto"
-          mt=""
+          mt="0.5rem"
           mb="2rem"
           justifyContent="center"
         >
@@ -114,10 +113,8 @@ const DeckSelect: React.FC = () => {
             New deck
           </MenuItem>
           {value?.docs.map((doc) => {
-            // there has to be a better way to do this
-            const uid = (doc as any)._key.path.segments[8];
-            const title = (doc as any)._document.data.value.mapValue.fields
-              .title.stringValue;
+            const uid = doc.id;
+            const title = doc.data().title;
 
             return (
               <MenuItem
@@ -136,7 +133,7 @@ const DeckSelect: React.FC = () => {
         <>
           <Button
             mt="1rem"
-            mb="1.5rem"
+            mb="1rem"
             ml="auto"
             mr="auto"
             w="15rem"
@@ -168,7 +165,7 @@ const DeckSelect: React.FC = () => {
         </>
       )}
       {empty && (
-        <Text mb="1rem" fontWeight="600" fontFamily="Assistant">
+        <Text mt="1rem" mb="1rem" fontWeight="600" fontFamily="Assistant">
           OR
         </Text>
       )}
