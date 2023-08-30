@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   });
   const [error, setError] = useState("");
   const [createUserWithEmailAndPassword, user, loading, userError] =
-    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    useCreateUserWithEmailAndPassword(auth);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
