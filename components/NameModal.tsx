@@ -44,7 +44,7 @@ const NameModal: React.FC<NMTypes> = ({ reload }: NMTypes) => {
   useEffect(() => {
     // console.log(!value?.name);
     setIsOpen(!docLoading && !value?.name);
-  }, [value]);
+  }, [value, docLoading]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -52,7 +52,7 @@ const NameModal: React.FC<NMTypes> = ({ reload }: NMTypes) => {
         <ModalContent textAlign="center">
           <ModalHeader fontSize="1.5rem">Welcome to Leitmotifs!</ModalHeader>
           <ModalBody>
-            <Text mb="1rem">What's your name?</Text>
+            <Text mb="1rem">What&apos;s your name?</Text>
             <Input
               placeholder="First name"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {

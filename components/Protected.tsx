@@ -14,7 +14,7 @@ const Protected: React.FC<ProtectedProps> = ({ children }: ProtectedProps) => {
   useEffect(() => {
     !user && !loading && redirect("/");
     user && setMounted(true);
-  }, [loading]);
+  }, [loading, user]);
 
   return <>{mounted && children}</>;
 };

@@ -41,7 +41,7 @@ const DeckSelect: React.FC = () => {
   // idk why this is necessary but it is
   useEffect(() => {
     toStudy && redirect("/study?deck=" + currentDeck);
-  }, [toStudy]);
+  }, [toStudy, currentDeck]);
 
   const handleOptionChange = (uid: string, title: string) => {
     setCurrentDeck(uid);

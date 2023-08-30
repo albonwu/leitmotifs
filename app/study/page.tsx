@@ -16,7 +16,7 @@ const Study: React.FC = () => {
 
   useEffect(() => {
     !user && !loading && redirect("/");
-  }, [user]);
+  }, [user, loading]);
 
   useEffect(() => console.log(rerender), [rerender]);
 
