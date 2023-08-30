@@ -10,7 +10,7 @@ type NewDeckProps = {
 
 const NewDeck: React.FC<NewDeckProps> = (props: NewDeckProps) => {
   return (
-    <Card w="30rem" mb="1rem" ml="auto" mr="auto" borderRadius="1rem">
+    <Card w="30rem" mt="1rem" mb="1rem" ml="auto" mr="auto" borderRadius="1rem">
       <CardHeader fontWeight="600">Create a new deck</CardHeader>
       <CardBody>
         <form onSubmit={props.newDeck}>

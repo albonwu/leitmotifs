@@ -1,13 +1,12 @@
 import { auth, firestore } from "@/firebase/clientApp";
-import { Badge, Card, CardBody, Divider } from "@chakra-ui/react";
+import { Badge, Card, CardBody, Divider, Flex } from "@chakra-ui/react";
 import { collection, doc } from "firebase/firestore";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  useCollection,
-  useDocumentDataOnce,
-} from "react-firebase-hooks/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 import { Text } from "@chakra-ui/react";
+import "@/styles/styles.css";
+import CardEditModal from "./CardEditModal";
 
 type DeckPreviewProps = {
   currentUID: string;
@@ -44,15 +43,27 @@ const DeckPreview: React.FC<DeckPreviewProps> = (props: DeckPreviewProps) => {
             ml="auto"
             mr="auto"
             borderRadius="1rem"
+            // className="card"
           >
             <CardBody key={uid}>
               <Text fontWeight="800"> {term} </Text>
               <br />
               {def}
               <br />
-              <Badge colorScheme={colors[box - 1]} mt="1rem">
-                Box {box}
-              </Badge>
+              <Flex
+                ml="auto"
+                mr="auto"
+                w="100%"
+                mt="1rem"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Flex w="3rem" />
+                <Flex ml="auto" mr="auto">
+                  <Badge colorScheme={colors[box - 1]}>Box {box}</Badge>
+                </Flex>
+                <CardEditModal deckUID={props.currentUID} cardUID={uid} term={term} def={def}/>
+              </Flex>
             </CardBody>
           </Card>
         );

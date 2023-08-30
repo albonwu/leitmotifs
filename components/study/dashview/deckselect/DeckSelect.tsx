@@ -165,7 +165,7 @@ const DeckSelect: React.FC = () => {
         </>
       )}
       {empty && (
-        <Text mt="1rem" mb="1rem" fontWeight="600" fontFamily="Assistant">
+        <Text mt="2rem" mb="1rem" fontWeight="600" fontFamily="Assistant">
           OR
         </Text>
       )}

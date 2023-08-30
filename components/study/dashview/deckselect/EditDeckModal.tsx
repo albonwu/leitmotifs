@@ -65,20 +65,18 @@ const EditDeckModal: React.FC<ECMProps> = ({
           <ModalBody>
             <form onSubmit={handleSubmit}>
               <Input placeholder="Name" name="name" onChange={handleChange} />
+              <Button
+                type="submit"
+                bgColor="lmPurple.100"
+                color="white"
+                mr="1rem"
+                _hover={{ bgColor: "lmPurple.50" }}
+              >
+                Rename
+              </Button>
+              <Button onClick={onClose}>Cancel</Button>
             </form>
           </ModalBody>
-          <ModalFooter>
-            <Button
-              type="submit"
-              bgColor="lmPurple.100"
-              color="white"
-              mr="1rem"
-              _hover={{ bgColor: "lmPurple.50" }}
-            >
-              Rename
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

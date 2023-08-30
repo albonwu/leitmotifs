@@ -48,6 +48,8 @@ const NewCardModal: React.FC<NCMProps> = (props: NCMProps) => {
       ),
       { term: term, definition: def, box: 1 }
     );
+
+    console.log("submitted");
     onClose();
   };
 
@@ -76,20 +78,22 @@ const NewCardModal: React.FC<NCMProps> = (props: NCMProps) => {
                 onChange={handleChange}
                 mt="0.5rem"
               />
+              <Button
+                type="submit"
+                bgColor="lmPurple.100"
+                color="white"
+                mr="1rem"
+                mt="1rem"
+                mb="0.5rem"
+                _hover={{ backgroundColor: "lmPurple.50" }}
+              >
+                Add
+              </Button>
+              <Button mt="1rem" mb="0.5rem" onClick={onClose}>
+                Cancel
+              </Button>
             </form>
           </ModalBody>
-          <ModalFooter>
-            <Button
-              type="submit"
-              bgColor="lmPurple.100"
-              color="white"
-              mr="1rem"
-              _hover={{ backgroundColor: "lmPurple.50" }}
-            >
-              Add
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
