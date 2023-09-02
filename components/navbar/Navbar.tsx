@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
         mt="1rem"
         h="4.5rem"
         alignItems="center"
-        outline="1px solid black"
+        // outline="1px solid black"
       >
         {user ? (
           <Link href="/study" passHref>
