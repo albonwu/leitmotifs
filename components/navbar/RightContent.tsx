@@ -10,6 +10,8 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase/clientApp";
@@ -17,6 +19,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const RightContent: React.FC = () => {
   const [user] = useAuthState(auth);
+  const fontSize = useBreakpointValue({ base: "2rem", md: "min(1.5rem, 7.5vw)" });
+
   return (
     <>
       {user && (
@@ -24,12 +28,12 @@ const RightContent: React.FC = () => {
           <Menu>
             <MenuButton
               as={Button}
-              fontSize="min(1.5rem, 7.5vw)"
+              fontSize={fontSize}
               leftIcon={<FaUserCircle />}
               bg="transparent"
-              fontWeight="700"
+              fontWeight="600"
             >
-              Profile
+              <Text display={{ base: "none", md: "block" }}>Profile</Text>
             </MenuButton>
             <MenuList>
               <MenuItem as="a" href="/study">

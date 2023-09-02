@@ -30,7 +30,7 @@
       }
 
       .cls-3 {
-        font-family: AssistantRoman-Bold, Assistant;
+        font-family: Assistant-Bold, Assistant;
         font-size: 107.58px;
         font-variation-settings: 'wght' 700;
         font-weight: 700;

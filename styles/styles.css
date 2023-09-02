@@ -6,3 +6,9 @@
   transform: scale(1.02);
   /* z-index: 9999 */
 }
+
+@media only screen and (max-width: 400px) {
+  .mobileshow {
+    display: none;
+  }
+}
