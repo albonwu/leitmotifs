@@ -27,7 +27,7 @@ const RightContent: React.FC = () => {
               fontSize="min(1.5rem, 7.5vw)"
               leftIcon={<FaUserCircle />}
               bg="transparent"
-              fontWeight="600"
+              fontWeight="700"
             >
               Profile
             </MenuButton>

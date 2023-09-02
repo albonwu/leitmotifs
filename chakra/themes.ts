@@ -1,4 +1,8 @@
 import { extendTheme } from "@chakra-ui/react";
+import '@fontsource/assistant/200.css'
+import '@fontsource/assistant/400.css'
+import '@fontsource/assistant/600.css'
+import '@fontsource/assistant/700.css'
 
 const theme = extendTheme({
   fonts: {
