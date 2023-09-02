@@ -3,7 +3,6 @@ import { Global } from "@emotion/react";
 const Fonts = () => (
   <Global
     styles={`
-
       @font-face {
         font-family: 'Assistant';
         font-style: extra-light;

@@ -20,14 +20,14 @@ const Navbar: React.FC = () => {
       <Flex backgroundColor={"transparent"} mt="1rem" alignItems="center">
         {user ? (
           <Link href="/study" passHref>
-            <Flex ml="2rem" height="4.5rem" maxW="50vw">
-              <Image src="/logo.svg" alt="Leitmotifs logo" />
+            <Flex ml="2rem" height="4.5rem" w="50vw">
+              <Image src="/logo.png" alt="Leitmotifs logo" /> 
             </Flex>
           </Link>
         ) : (
           <Link href="/" passHref>
-            <Flex ml="2rem" height="4.5rem" maxW="50vw">
-              <Image src="/logo.svg" alt="Leitmotifs logo" />
+            <Flex ml="2rem" height="4.5rem" w="50vw">
+              <Image src="/logo.png" alt="Leitmotifs logo" />
             </Flex>
           </Link>
         )}

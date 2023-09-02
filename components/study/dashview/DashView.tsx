@@ -44,7 +44,7 @@ const DashView: React.FC = () => {
           textAlign="center"
           flexDir="column"
         >
-          <Text fontSize="2.5rem" fontFamily="Assistant">
+          <Text fontSize="2.5rem">
             Welcome back,{" "}
             <span style={{ fontWeight: 800, color: "#5c38b3" }}>
               {userDoc?.name.name}!

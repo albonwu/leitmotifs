@@ -25,7 +25,6 @@ const RightContent: React.FC = () => {
             <MenuButton
               as={Button}
               fontSize="min(1.5rem, 7.5vw)"
-              fontFamily="Assistant"
               leftIcon={<FaUserCircle />}
               bg="transparent"
               fontWeight="600"

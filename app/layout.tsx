@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar/Navbar";
 import { Providers } from "./providers";
