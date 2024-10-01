@@ -10,4 +10,4 @@ Leitmotifs
 In this implementation, flashcards are partitioned based on the user's mastery of them - Box 1 contains the weakest cards, while Box 5 contains the strongest. If a user gets a flashcard correct, it moves up a box, and down otherwise. Cards in lower-numbered boxes are shown at a higher frequency than those in higher-numbered ones.
 
 ## Stack
-Next.js, Django, Firebase, Chakra.
+Next.js, Firebase, Chakra.
